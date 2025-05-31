@@ -1,71 +1,161 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Esek ❤️</title>
-  <style>
-    body {
-      background: #fff0f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maymun Sumo</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
 
-    .heart {
-      width: 100px;
-      height: 90px;
-      position: relative;
-      transform: rotate(-45deg);
-      animation: heartbeat 1s infinite;
-      margin-bottom: 20px;
-    }
+  .heart {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: red;
+    transform: rotate(-45deg);
+    animation: pulse 2s infinite;
+    cursor: pointer;
+    z-index: 10;
+  }
 
-    .heart::before,
-    .heart::after {
-      content: "";
-      width: 100px;
-      height: 90px;
-      position: absolute;
-      background: red;
-      border-radius: 50%;
-    }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    background: red;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
 
-    .heart::before {
-      top: -50px;
-      left: 0;
-    }
+  .heart::before {
+    top: -50px;
+    left: 0;
+  }
 
-    .heart::after {
-      left: 50px;
-      top: 0;
-    }
+  .heart::after {
+    top: 0;
+    left: 50px;
+  }
 
-    @keyframes heartbeat {
-      0% { transform: scale(1) rotate(-45deg); }
-      50% { transform: scale(1.2) rotate(-45deg); }
-      100% { transform: scale(1) rotate(-45deg); }
+  @keyframes pulse {
+    0%, 100% {
+      transform: rotate(-45deg) scale(1);
+      opacity: 1;
     }
+    50% {
+      transform: rotate(-45deg) scale(1.3);
+      opacity: 0.8;
+    }
+  }
 
-    .text {
-      font-size: 24px;
-      color: #c2185b;
-      text-align: center;
-      animation: fadeIn 2s ease-in-out;
-    }
+  .text {
+    margin-top: 50px;
+    font-size: 24px;
+    color: #d6336c;
+    user-select: none;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+  /* Dökülen küçük kalpler (kalp şekli) */
+  .floating-heart {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: red;
+    transform: rotate(-45deg);
+    pointer-events: none;
+    animation: floatUp 1.5s forwards ease-out;
+    z-index: 9999;
+  }
+  .floating-heart::before,
+  .floating-heart::after {
+    content: "";
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+  }
+  .floating-heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .floating-heart::after {
+    top: 0;
+    left: 10px;
+  }
+
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: rotate(-45deg) translateY(0) scale(1);
     }
-  </style>
+    100% {
+      opacity: 0;
+      transform: rotate(-45deg) translateY(-100px) scale(0.5);
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="heart"></div>
-  <div class="text">Seni 3000 kez seviyorum maymun 💖</div>
+
+<div class="heart" id="mainHeart"></div>
+<div class="text">Seni 3000 kez seviyorum maymun 💖</div>
+
+<script>
+  const heart = document.getElementById('mainHeart');
+
+  const colors = [
+    '#e63946', // kırmızı tonları
+    '#f1faee',
+    '#a8dadc',
+    '#457b9d',
+    '#ffb703',
+    '#fb8500',
+    '#ff006e',
+    '#8338ec'
+  ];
+
+  heart.addEventListener('click', () => {
+    for(let i = 0; i < 10; i++) {
+      createFloatingHeart();
+    }
+  });
+
+  function createFloatingHeart() {
+    const floatingHeart = document.createElement('div');
+    floatingHeart.classList.add('floating-heart');
+
+    // Rastgele renk seç
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    floatingHeart.style.background = color;
+
+    // Position random ama kalbe yakın
+    const x = window.innerWidth / 2 + (Math.random() * 120 - 60);
+    const y = window.innerHeight / 2 + (Math.random() * 120 - 60);
+
+    floatingHeart.style.left = `${x}px`;
+    floatingHeart.style.top = `${y}px`;
+
+    document.body.appendChild(floatingHeart);
+
+    // 1.5 saniye sonra kaldır
+    setTimeout(() => {
+      floatingHeart.remove();
+    }, 1500);
+  }
+</script>
+
 </body>
 </html>
