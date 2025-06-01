@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>❤️ </title>
+  <title>❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -194,7 +194,7 @@
       }
     }
 
-    /* ********* Kalp patlama animasyonu ************ */
+
 
     @keyframes heartExplosion {
       0% {
@@ -300,8 +300,6 @@
         createFloatingHeart();
       }
     });
-
-    // Arka planda sürekli kalp yağması
     setInterval(() => {
       createFloatingHeart();
     }, 1000);
@@ -323,8 +321,6 @@
 
     setInterval(createFallingHeart, 50);
 
-    // ********* Butona basınca kalp patlatma animasyonu *********
-
     function heartExplosionAnimation() {
   const mainHeart = document.getElementById('mainHeart');
   const rect = mainHeart.getBoundingClientRect();
@@ -332,7 +328,6 @@
   const explosion = document.createElement('div');
   explosion.classList.add('explosion-heart');
 
-  // Ana kalbin ortasına yerleştir
   explosion.style.left = `${rect.left + rect.width / 2 - 50}px`;
   explosion.style.top = `${rect.top + rect.height / 2 - 50}px`;
 
@@ -347,13 +342,12 @@
 
 document.querySelector('.surprise').onclick = () => {
   heartExplosionAnimation();
-  surprise(); // varsa çalıştır, yoksa boş kalsın
+  surprise();
 };
 
 
-    // Eğer 'surprise' fonksiyonun yoksa bunu sil veya aşağıdaki gibi basitçe yapabilirsin:
     function surprise() {
-      // İstersen burada ekstra efektler koyabilirsin, boş bırakabilirsin.
+     
     }
     
   </script>
